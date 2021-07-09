@@ -1,12 +1,14 @@
-import { Flex, Button, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Flex, Button, Text, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
-import { AuthContext, signInWithGoogle, signOut } from "../lib/auth";
+import { AuthContext, signInWithGoogle } from "../lib/auth";
+import { Layout } from "../components/Layout";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
 
   return (
-    <Flex bg="gray.100" justify="center" align="center" minHeight="100vh">
+    <Layout>
       <Flex direction="column" maxWidth="400px">
         <Text fontSize="lg" mb="8">
           <Text as="span" fontWeight="bold">
@@ -20,14 +22,16 @@ export default function Home() {
           methods including Authenticated API routes.
         </Text>
         {!user && <SignInButton />}
-        {user && <SignOutButton />}
+        {user && <DashboardLink />}
       </Flex>
-    </Flex>
+    </Layout>
   );
 }
 
 //button - sign in
 const SignInButton = () => {
+  const toast = useToast();
+
   return (
     <Button
       color="white"
@@ -37,27 +41,39 @@ const SignInButton = () => {
       _active={{
         transform: "scale(0.95)",
       }}
-      onClick={() => signInWithGoogle()}
+      onClick={async () => {
+        await signInWithGoogle();
+        toast({
+          title: "Signed In.",
+          description: "You've successfully signed in to account",
+          status: "success",
+          duration: 4000,
+          isClosable: true,
+        });
+      }}
     >
       Sign In
     </Button>
   );
 };
 
-//button - sign out
-const SignOutButton = () => {
+//button - go to dashboard
+const DashboardLink = () => {
   return (
-    <Button
-      color="white"
-      bg="gray.900"
-      size="lg"
-      _hover={{ bg: "gray.800" }}
-      _active={{
-        transform: "scale(0.95)",
-      }}
-      onClick={() => signOut()}
-    >
-      Sign Out
-    </Button>
+    <NextLink href="/dashboard">
+      <Button
+        as="a"
+        color="white"
+        bg="green.700"
+        size="lg"
+        href="/dashboard"
+        _hover={{ bg: "green.600" }}
+        _active={{
+          transform: "scale(0.95)",
+        }}
+      >
+        View Dashboard
+      </Button>
+    </NextLink>
   );
 };

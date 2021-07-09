@@ -1,4 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "../lib/auth";
 
 function MyApp({ Component, pageProps }) {
@@ -6,6 +7,7 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider>
       <AuthProvider>
         <Component {...pageProps} />
+        <Toaster />
       </AuthProvider>
     </ChakraProvider>
   );
