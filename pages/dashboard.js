@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { Avatar, Button, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Layout } from "../components/Layout";
@@ -5,6 +6,7 @@ import { AuthContext, signOut } from "../lib/auth";
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
+  const router = useRouter();
 
   return (
     <Layout>
@@ -24,7 +26,10 @@ export default function Dashboard() {
             _active={{
               transform: "scale(0.95)",
             }}
-            onClick={() => signOut()}
+            onClick={async () => {
+              await signOut();
+              router.push("/");
+            }}
           >
             Sign Out
           </Button>
