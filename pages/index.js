@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { Flex, Button, Text, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
-import { AuthContext } from "../lib/auth";
+import { AuthContext } from "../context/auth";
 import { Layout } from "../components/Layout";
 import { auth, googleAuth } from "../lib/firebase";
 
@@ -60,9 +60,6 @@ const DashboardLink = () => {
         size="lg"
         href="/dashboard"
         _hover={{ bg: "green.600" }}
-        _active={{
-          transform: "scale(0.95)",
-        }}
       >
         View Dashboard
       </Button>

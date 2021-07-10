@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { Avatar, Button, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import { Layout } from "../components/Layout";
 import { auth } from "../lib/firebase";
-import { AuthContext } from "../lib/auth";
+import { AuthContext } from "../context/auth";
 import { useContext } from "react";
 
 export default function Dashboard() {

@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { Toaster } from "react-hot-toast";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { AuthContext } from "../lib/auth";
+import { AuthContext } from "../context/auth";
 import { auth, firestore } from "../lib/firebase";
 
 function MyApp({ Component, pageProps }) {
