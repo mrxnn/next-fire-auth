@@ -1,14 +1,18 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "../lib/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { AuthContext } from "../lib/auth";
+import { auth, firestore } from "../lib/firebase";
 
 function MyApp({ Component, pageProps }) {
+  const [user] = useAuthState(auth);
+
   return (
     <ChakraProvider>
-      <AuthProvider>
+      <AuthContext.Provider value={{ user }}>
         <Component {...pageProps} />
         <Toaster />
-      </AuthProvider>
+      </AuthContext.Provider>
     </ChakraProvider>
   );
 }

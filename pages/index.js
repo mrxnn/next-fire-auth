@@ -1,8 +1,9 @@
 import NextLink from "next/link";
 import { Flex, Button, Text, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
-import { AuthContext, signInWithGoogle } from "../lib/auth";
+import { AuthContext } from "../lib/auth";
 import { Layout } from "../components/Layout";
+import { auth, googleAuth } from "../lib/firebase";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
@@ -30,7 +31,10 @@ export default function Home() {
 
 //button - sign in
 const SignInButton = () => {
-  const toast = useToast();
+  const signInWithGoogle = async () => {
+    const { user } = await auth.signInWithPopup(googleAuth);
+    console.log(`Signed in as ${user.email}`);
+  };
 
   return (
     <Button
@@ -38,21 +42,9 @@ const SignInButton = () => {
       bg="green.700"
       size="lg"
       _hover={{ bg: "green.600" }}
-      _active={{
-        transform: "scale(0.95)",
-      }}
-      onClick={async () => {
-        await signInWithGoogle();
-        toast({
-          title: "Signed In.",
-          description: "You've successfully signed in to account",
-          status: "success",
-          duration: 4000,
-          isClosable: true,
-        });
-      }}
+      onClick={() => signInWithGoogle()}
     >
-      Sign In
+      Sign In With Google
     </Button>
   );
 };
