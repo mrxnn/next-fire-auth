@@ -10,10 +10,14 @@ export default function Home() {
   return (
     <Layout>
       <div className="flex flex-col items-start">
-        <p className="mb-6 text-gray-800">
-          NextFireAuthSSR is an example for building authenticated pages with
-          Firebase Authentication. It demonstrates every next.js data fetching
-          (CSR, SSR, SSG, ISR) methods including Authenticated API routes.
+        <p className="mb-6">
+          <span className="font-bold">NextFireAuthSSR</span> is an example for
+          building authenticated pages with Firebase Authentication. It
+          demonstrates every next.js data fetching{" "}
+          <Link href="https://nextjs.org/docs/basic-features/data-fetching">
+            <a className="font-bold">(CSR, SSR, SSG, ISR)</a>
+          </Link>{" "}
+          methods including Authenticated API routes.
         </p>
         {loading ? (
           <Spinner />
@@ -33,7 +37,7 @@ const GoogleSignInButton = () => {
 
   return (
     <button
-      className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700"
+      className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700"
       onClick={() => signInWithGoogle()}>
       Sign In With Google
     </button>

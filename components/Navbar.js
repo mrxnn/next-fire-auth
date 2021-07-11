@@ -11,7 +11,7 @@ export default function Navbar() {
     <div className="flex items-center justify-between h-20 border-b mb-10">
       <div className="flex items-center">
         <Link href="/">
-          <a className="font-bold text-xl mr-6">NextFireAuthSSR</a>
+          <a className="font-bold text-xl mr-6">NextFireAuth</a>
         </Link>
         <Link href="/dashboard">
           <a className="text-gray-500 hover:text-gray-900">Dashboard</a>
