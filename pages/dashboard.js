@@ -4,6 +4,16 @@ import { Layout } from "../components/Layout";
 import { auth } from "../lib/firebase";
 import { AuthContext } from "../context/auth";
 import { useContext } from "react";
+import nookies from "nookies";
+
+export async function getServerSideProps(context) {
+  console.log("Testing token...");
+  const tkn = nookies.get(context);
+  console.log("TOKEN", tkn);
+  return {
+    props: {},
+  };
+}
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);

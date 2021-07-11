@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { Flex, Button, Text, useToast } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth";
 import { Layout } from "../components/Layout";
 import { auth, googleAuth } from "../lib/firebase";
@@ -33,7 +33,6 @@ export default function Home() {
 const SignInButton = () => {
   const signInWithGoogle = async () => {
     const { user } = await auth.signInWithPopup(googleAuth);
-    console.log(`Signed in as ${user.email}`);
   };
 
   return (
