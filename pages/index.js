@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Flex direction="column" maxWidth="400px">
+      <Flex direction="column" mt="20" mx="auto">
         <Text fontSize="lg" mb="8">
           <Text as="span" fontWeight="bold">
             NextFireAuthSSR

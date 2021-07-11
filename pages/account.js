@@ -15,7 +15,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function Dashboard() {
+export default function Account() {
   const { user, loading, signOut } = useContext(AuthContext);
   const router = useRouter();
 

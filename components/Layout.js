@@ -1,10 +1,12 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
+import Navbar from "./Navbar";
 
 export const Layout = ({ children }) => {
   return (
-    <Flex bg="gray.100" justify="center" align="center" minHeight="100vh">
-      {children}
-    </Flex>
+    <Box bg="gray.100" minHeight="100vh">
+      <Navbar />
+      <Container maxW="container.sm">{children}</Container>
+    </Box>
   );
 };
