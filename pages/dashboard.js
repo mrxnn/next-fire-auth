@@ -1,11 +1,11 @@
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Avatar, Button, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
-import { Layout } from "../components/Layout";
-import { auth } from "../lib/firebase";
-import { AuthContext } from "../context/auth";
-import { useContext } from "react";
 import nookies from "nookies";
+import { Layout } from "../components/Layout";
+import { AuthContext } from "../context/auth";
 
+//SSR
 export async function getServerSideProps(context) {
   console.log("Testing token...");
   const tkn = nookies.get(context);
@@ -16,17 +16,12 @@ export async function getServerSideProps(context) {
 }
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, loading, signOut } = useContext(AuthContext);
   const router = useRouter();
-
-  const signOut = async () => {
-    await auth.signOut();
-    router.push("/");
-  };
 
   return (
     <Layout>
-      {!user && <Spinner />}
+      {loading && <Spinner />}
 
       {user && (
         <Flex align="center" direction="column">
@@ -39,7 +34,7 @@ export default function Dashboard() {
             bg="gray.700"
             size="lg"
             _hover={{ bg: "gray.600" }}
-            onClick={() => signOut()}
+            onClick={() => signOut("/")}
           >
             Sign Out
           </Button>

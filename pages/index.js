@@ -1,9 +1,8 @@
+import { useContext } from "react";
 import NextLink from "next/link";
-import { Flex, Button, Text, useToast } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { Flex, Button, Text } from "@chakra-ui/react";
 import { AuthContext } from "../context/auth";
 import { Layout } from "../components/Layout";
-import { auth, googleAuth } from "../lib/firebase";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
@@ -22,7 +21,7 @@ export default function Home() {
           </Text>{" "}
           methods including Authenticated API routes.
         </Text>
-        {!user && <SignInButton />}
+        {!user && <GoogleSignInButton />}
         {user && <DashboardLink />}
       </Flex>
     </Layout>
@@ -30,10 +29,8 @@ export default function Home() {
 }
 
 //button - sign in
-const SignInButton = () => {
-  const signInWithGoogle = async () => {
-    const { user } = await auth.signInWithPopup(googleAuth);
-  };
+const GoogleSignInButton = () => {
+  const { signInWithGoogle } = useContext(AuthContext);
 
   return (
     <Button
