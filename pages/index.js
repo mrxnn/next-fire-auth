@@ -15,14 +15,17 @@ export default function Home() {
         ) : user ? (
           <DashboardLink />
         ) : (
-          <GoogleSignInButton />
+          <div className="flex flex-col space-y-2">
+            <GoogleSignInButton />
+            <GithubSignInButton />
+          </div>
         )}
       </div>
     </Layout>
   );
 }
 
-//button - sign in
+//button - google sign in
 const GoogleSignInButton = () => {
   const { signInWithGoogle } = useContext(AuthContext);
 
@@ -31,6 +34,15 @@ const GoogleSignInButton = () => {
       className="bg-gray-800 text-white px-5 rounded py-2 uppercase text-xs tracking-widest hover:bg-gray-700"
       onClick={() => signInWithGoogle()}>
       Sign In With Google
+    </button>
+  );
+};
+
+//button - github sign in
+const GithubSignInButton = () => {
+  return (
+    <button className="bg-gray-800 text-white px-5 rounded py-2 uppercase text-xs tracking-widest hover:bg-gray-700">
+      Sign In With GitHub
     </button>
   );
 };
