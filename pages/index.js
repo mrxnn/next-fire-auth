@@ -1,29 +1,28 @@
 import { useContext } from "react";
-import NextLink from "next/link";
-import { Flex, Button, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import { AuthContext } from "../context/auth";
-import { Layout } from "../components/Layout";
+import Layout from "../components/Layout";
+import Spinner from "../components/Spinner";
 
 export default function Home() {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   return (
     <Layout>
-      <Flex direction="column" mt="20" mx="auto">
-        <Text fontSize="lg" mb="8">
-          <Text as="span" fontWeight="bold">
-            NextFireAuthSSR
-          </Text>{" "}
-          is an example for building authenticated pages with Firebase
-          Authentication. It demonstrates every next.js data fetching{" "}
-          <Text as="span" textDecoration="underline">
-            (CSR, SSR, SSG, ISR)
-          </Text>{" "}
-          methods including Authenticated API routes.
-        </Text>
-        {!user && <GoogleSignInButton />}
-        {user && <DashboardLink />}
-      </Flex>
+      <div className="flex flex-col items-start">
+        <p className="mb-6 text-gray-800">
+          NextFireAuthSSR is an example for building authenticated pages with
+          Firebase Authentication. It demonstrates every next.js data fetching
+          (CSR, SSR, SSG, ISR) methods including Authenticated API routes.
+        </p>
+        {loading ? (
+          <Spinner />
+        ) : user ? (
+          <DashboardLink />
+        ) : (
+          <GoogleSignInButton />
+        )}
+      </div>
     </Layout>
   );
 }
@@ -33,32 +32,23 @@ const GoogleSignInButton = () => {
   const { signInWithGoogle } = useContext(AuthContext);
 
   return (
-    <Button
-      color="white"
-      bg="green.700"
-      size="lg"
-      _hover={{ bg: "green.600" }}
-      onClick={() => signInWithGoogle()}
-    >
+    <button
+      className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700"
+      onClick={() => signInWithGoogle()}>
       Sign In With Google
-    </Button>
+    </button>
   );
 };
 
 //button - go to dashboard
 const DashboardLink = () => {
   return (
-    <NextLink href="/dashboard">
-      <Button
-        as="a"
-        color="white"
-        bg="green.700"
-        size="lg"
-        href="/dashboard"
-        _hover={{ bg: "green.600" }}
-      >
+    <Link href="/dashboard">
+      <a
+        className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700 inline-block"
+        href="/dashboard">
         View Dashboard
-      </Button>
-    </NextLink>
+      </a>
+    </Link>
   );
 };

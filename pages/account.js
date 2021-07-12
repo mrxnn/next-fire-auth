@@ -1,16 +1,8 @@
-import { useContext, useEffect } from "react";
-import {
-  Avatar,
-  Button,
-  Flex,
-  Heading,
-  Skeleton,
-  SkeletonCircle,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { useContext } from "react";
+import Image from "next/image";
 import nookies from "nookies";
-import { Layout } from "../components/Layout";
+import Layout from "../components/Layout";
+import Spinner from "../components/Spinner";
 import { AuthContext } from "../context/auth";
 
 //SSR
@@ -28,31 +20,24 @@ export default function Account() {
 
   return (
     <Layout>
-      {loading && (
-        <Stack align="center" mt="20" spacing="4">
-          <SkeletonCircle size="24" mb="4" />
-          <Skeleton height="30px" w="400px" />
-          <Skeleton height="12px" w="400px" />
-          <Skeleton height="20px" w="400px" />
-        </Stack>
-      )}
+      <div className="text-center">{loading && <Spinner />}</div>
 
       {user && (
-        <Flex align="center" direction="column" mt="20">
-          <Avatar src={user?.photoURL} size="xl" mb="4" />
-          <Heading size="lg">{user?.displayName}</Heading>
-          <Text decoration="underline">{user?.email}</Text>
-          <Button
-            mt="6"
-            color="white"
-            bg="gray.700"
-            size="lg"
-            _hover={{ bg: "gray.600" }}
-            onClick={() => signOut("/")}
-          >
+        <div className="text-center">
+          <Image
+            src={user.photoURL}
+            width="50px"
+            height="50px"
+            className="rounded-full"
+          />
+          <h2 className="font-bold text-2xl">{user?.displayName}</h2>
+          <p className="text-gray-800 mb-8">{user?.email}</p>
+          <button
+            className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700"
+            onClick={() => signOut("/")}>
             Sign Out
-          </Button>
-        </Flex>
+          </button>
+        </div>
       )}
     </Layout>
   );

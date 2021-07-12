@@ -1,39 +1,45 @@
-import { Avatar, Button, Flex, Link, Stack, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { useContext } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { AuthContext } from "../context/auth";
+import Spinner from "./Spinner";
 
 export default function Navbar() {
-  const { user, signInWithGoogle } = useContext(AuthContext);
+  const { user, loading, signInWithGoogle } = useContext(AuthContext);
 
   return (
-    <Flex bg="white" mb="10" justify="space-between" h="20" px="8">
-      <Stack direction="row" align="center" spacing="10">
-        <NextLink href="/">
-          <Text as="a" href="/" fontSize="xl" fontWeight="bold" mt="-1">
-            NextFireAuthSSR
-          </Text>
-        </NextLink>
-        <NextLink href="/dashboard">
-          <Link href="/dashboard" fontWeight="semibold">
-            Dashboard (SSR)
-          </Link>
-        </NextLink>
-      </Stack>
-      <Stack direction="row" align="center" spacing="6">
-        {user ? (
-          <>
-            <NextLink href="/account">
-              <Link href="/account" fontWeight="semibold">
-                {user.displayName}
-              </Link>
-            </NextLink>
-            <Avatar src={user?.photoURL} />
-          </>
-        ) : (
-          <Button onClick={() => signInWithGoogle()}>Sign In</Button>
+    <div className="flex items-center justify-between h-20 border-b mb-10">
+      <div className="flex items-center">
+        <Link href="/">
+          <a className="font-bold text-xl mr-6">NextFireAuthSSR</a>
+        </Link>
+        <Link href="/dashboard">
+          <a className="text-gray-500 hover:text-gray-900">Dashboard</a>
+        </Link>
+      </div>
+      <div>
+        {loading && <Spinner />}
+        {user && (
+          <div className="flex items-center">
+            <Link href="/account">
+              <a className="mr-6 text-gray-500 hover:text-gray-900">Account</a>
+            </Link>
+            <Image
+              src={user.photoURL}
+              width="32px"
+              height="32px"
+              className="rounded-full"
+            />
+          </div>
         )}
-      </Stack>
-    </Flex>
+        {!user && !loading && (
+          <button
+            className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700"
+            onClick={() => signInWithGoogle()}>
+            Sign In
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
