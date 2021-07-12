@@ -33,7 +33,7 @@ export default function Account() {
           <h2 className="font-bold text-2xl">{user?.displayName}</h2>
           <p className="text-gray-800 mb-8">{user?.email}</p>
           <button
-            className="bg-gray-800 text-white px-8 py-2 rounded hover:bg-gray-700"
+            className="bg-gray-800 text-white px-5 rounded py-2 uppercase text-xs tracking-widest hover:bg-gray-700"
             onClick={() => signOut("/")}>
             Sign Out
           </button>
