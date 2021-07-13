@@ -6,14 +6,14 @@ import Spinner from "../components/Spinner";
 import { AuthContext } from "../context/auth";
 
 //SSR
-// export async function getServerSideProps(context) {
-//   console.log("Testing token...");
-//   const tkn = nookies.get(context);
-//   console.log("TOKEN", tkn);
-//   return {
-//     props: {},
-//   };
-// }
+export async function getServerSideProps(context) {
+  console.log("Testing token...");
+  const tkn = nookies.get(context);
+  console.log("TOKEN", tkn);
+  return {
+    props: {},
+  };
+}
 
 export default function Account() {
   const { user, loading, signOut } = useContext(AuthContext);

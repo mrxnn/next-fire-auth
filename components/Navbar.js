@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AuthContext } from "../context/auth";
@@ -7,17 +7,6 @@ import Info from "./Info";
 
 export default function Navbar() {
   const { user, loading } = useContext(AuthContext);
-
-  console.log("Outside Called");
-  useEffect(() => {
-    console.log("User Called");
-  }, [user]);
-  useEffect(() => {
-    console.log("Loading Called");
-  }, [loading]);
-  useEffect(() => {
-    console.log("Empty Called");
-  }, []);
 
   return (
     <div className="flex flex-col border-b mb-10">
