@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Link from "next/link";
-import { AuthContext } from "../context/auth";
+import AuthContext from "../context/auth";
 import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
 

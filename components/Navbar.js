@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AuthContext } from "../context/auth";
+import AuthContext from "../context/auth";
 import Spinner from "./Spinner";
 import Info from "./Info";
 
