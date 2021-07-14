@@ -3,7 +3,7 @@ import Image from "next/image";
 import nookies from "nookies";
 import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
-import { AuthContext } from "../context/auth";
+import AuthContext from "../context/auth";
 
 //SSR
 export async function getServerSideProps(context) {
